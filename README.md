@@ -1,2 +1,2 @@
-# Dancer-sMediaPlayer
+# DancersMediaPlayer
 A media player for dancers
