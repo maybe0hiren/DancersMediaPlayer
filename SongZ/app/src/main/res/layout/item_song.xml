@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/songTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Song Name"
+        android:textSize="16sp"
+        android:padding="4dp" />
+
+    <Button
+        android:id="@+id/buttonJump"
+        android:background="@drawable/button_rounded_corner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jump" />
+
+    <!-- Added marginStart to create space between buttons -->
+    <Button
+        android:id="@+id/buttonDelete"
+        android:background="@drawable/button_rounded_corner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Delete"
+        android:contentDescription="Delete song" />
+
+</LinearLayout>
