@@ -33,13 +33,6 @@ public class SongActivity extends AppCompatActivity{
         int seconds = (millis / 1000) % 60;
         return String.format("%02d:%02d", minutes, seconds);
     }
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        // Clear all markers
-//        if(dbHelper != null) {
-//            dbHelper.deleteEverything();
-//        }
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,5 +171,9 @@ public class SongActivity extends AppCompatActivity{
                 buttonPlayPause.setText("Play"); // update UI
             }
         });
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.pause();
     }
 }
