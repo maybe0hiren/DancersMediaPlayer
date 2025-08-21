@@ -1,0 +1,39 @@
+prototype/build
+
+# Gradle build folders
+SongZ/.gradle/
+SongZ/build/
+SongZ/**/build/
+
+# Local configuration file (SDK path)
+SongZ/local.properties
+
+# Android Studio IDE files
+SongZ/.idea/
+SongZ/*.iml
+SongZ/*.iws
+SongZ/*.ipr
+
+# OS files
+SongZ/.DS_Store
+SongZ/Thumbs.db
+
+# Log files
+SongZ/*.log
+
+# APKs, AABs, and intermediate outputs
+SongZ/*.apk
+SongZ/*.ap_
+SongZ/*.aab
+SongZ/captures/
+SongZ/output.json
+SongZ/lint/intermediates/
+SongZ/lint/generated/
+
+# Keystore files (optional, if you don't want to share)
+SongZ/*.jks
+SongZ/*.keystore
+
+# Temporary files
+SongZ/*.tmp
+SongZ/*.temp
