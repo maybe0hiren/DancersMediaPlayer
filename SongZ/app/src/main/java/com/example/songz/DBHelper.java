@@ -20,9 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Songs table
         db.execSQL("CREATE TABLE Songs (id INTEGER PRIMARY KEY AUTOINCREMENT, songName TEXT, songPath TEXT)");
-        // Markers table
         db.execSQL("CREATE TABLE Markers (id INTEGER PRIMARY KEY AUTOINCREMENT, songId INTEGER, markerName TEXT, timestamp INTEGER, FOREIGN KEY(songId) REFERENCES Songs(id))");
     }
 
@@ -33,7 +31,6 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // Add a song
     public long addSong(String name, String path){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -42,7 +39,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.insert("Songs", null, values);
     }
 
-    // Add a marker
     public long addMarker(long songId, String markerName, long timestamp){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -52,7 +48,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.insert("Markers", null, values);
     }
 
-    // Get all songs
     public ArrayList<Song> getAllSongs(){
         ArrayList<Song> songs = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -63,7 +58,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("songName"));
                 String path = cursor.getString(cursor.getColumnIndexOrThrow("songPath"));
                 Uri uri = Uri.parse(path);
-                Song song = new Song(name, uri); // you'll modify constructor to accept id
+                Song song = new Song(name, uri);
                 song.setId(id);
                 songs.add(song);
             } while(cursor.moveToNext());
@@ -79,11 +74,11 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM Markers WHERE songId=?", new String[]{String.valueOf(songId)});
         if(cursor.moveToFirst()){
             do{
-                long id = cursor.getLong(cursor.getColumnIndexOrThrow("id")); // <-- get DB ID
+                long id = cursor.getLong(cursor.getColumnIndexOrThrow("id")); 
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("markerName"));
                 long timestamp = cursor.getLong(cursor.getColumnIndexOrThrow("timestamp"));
                 Marker marker = new Marker(timestamp, name);
-                marker.setId(id);  // <-- set the DB ID here
+                marker.setId(id); 
                 markers.add(marker);
             } while(cursor.moveToNext());
         }
@@ -100,7 +95,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("markerName"));
                 long timestamp = cursor.getLong(cursor.getColumnIndexOrThrow("timestamp"));
                 Marker marker = new Marker(timestamp, name);
-                marker.setId(id);  // <-- Set the DB ID here
+                marker.setId(id); 
                 markers.add(marker);
             } while(cursor.moveToNext());
         }
@@ -120,9 +115,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void deleteSong(long songId){
         SQLiteDatabase db = this.getWritableDatabase();
-        // First delete markers
         db.delete("Markers", "songId=?", new String[]{String.valueOf(songId)});
-        // Then delete the song
         db.delete("Songs", "id=?", new String[]{String.valueOf(songId)});
     }
     public void deleteMarker(long markerId) {
@@ -131,7 +124,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public void deleteEverything(){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("Markers", null, null); // delete all markers
-        db.delete("Songs", null, null);   // optional: delete all songs
+        db.delete("Markers", null, null);
+        db.delete("Songs", null, null);
     }
 }
